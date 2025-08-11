@@ -1,0 +1,157 @@
+{
+  "newsletter": {
+    "name": "Newsletter Template",
+    "description": "Professional newsletter template with header, content, and footer",
+    "category": "Newsletter",
+    "variables": [
+      "company_name",
+      "newsletter_title",
+      "main_content",
+      "call_to_action",
+      "unsubscribe_link"
+    ],
+    "content": {
+      "title": "Newsletter Title",
+      "header_color": "#2c3e50",
+      "content_background": "#ffffff",
+      "accent_color": "#3498db",
+      "sections": [
+        {
+          "type": "header",
+          "content": "Welcome to our Newsletter!",
+          "style": "large_title"
+        },
+        {
+          "type": "text",
+          "content": "This is the main content of your newsletter. You can write multiple paragraphs here.",
+          "style": "body_text"
+        },
+        {
+          "type": "button",
+          "content": "Read More",
+          "url": "#",
+          "style": "primary_button"
+        },
+        {
+          "type": "divider",
+          "style": "thin_line"
+        },
+        {
+          "type": "footer",
+          "content": "© 2025 Company Name. All rights reserved.",
+          "style": "small_text"
+        }
+      ]
+    },
+    "created_date": "2025-08-11T17:18:45.259632",
+    "last_modified": "2025-08-11T17:18:45.259671"
+  },
+  "business": {
+    "name": "Business Communication",
+    "description": "Professional business email template",
+    "category": "Business",
+    "variables": [
+      "recipient_name",
+      "company_name",
+      "message_content",
+      "contact_info"
+    ],
+    "content": {
+      "title": "Business Communication",
+      "header_color": "#34495e",
+      "content_background": "#f8f9fa",
+      "accent_color": "#2c3e50",
+      "sections": [
+        {
+          "type": "header",
+          "content": "Business Communication",
+          "style": "business_title"
+        },
+        {
+          "type": "text",
+          "content": "Dear {{recipient_name}},\n\nThis is a professional business communication.",
+          "style": "formal_text"
+        },
+        {
+          "type": "text",
+          "content": "Best regards,\n{{company_name}}",
+          "style": "signature"
+        }
+      ]
+    },
+    "created_date": "2025-08-11T17:18:45.259676",
+    "last_modified": "2025-08-11T17:18:45.259677"
+  },
+  "promotional": {
+    "name": "Promotional Email",
+    "description": "Marketing and promotional email template",
+    "category": "Marketing",
+    "variables": [
+      "recipient_name",
+      "offer_title",
+      "offer_description",
+      "cta_button",
+      "expiry_date"
+    ],
+    "content": {
+      "title": "Special Offer",
+      "header_color": "#e74c3c",
+      "content_background": "#fff5f5",
+      "accent_color": "#c0392b",
+      "sections": [
+        {
+          "type": "header",
+          "content": "🎉 Special Offer Just for You!",
+          "style": "promotional_title"
+        },
+        {
+          "type": "text",
+          "content": "Hi {{recipient_name}},\n\nWe have an amazing offer that you won't want to miss!",
+          "style": "excited_text"
+        },
+        {
+          "type": "button",
+          "content": "Claim Offer Now",
+          "url": "#",
+          "style": "urgent_button"
+        },
+        {
+          "type": "text",
+          "content": "Offer expires: {{expiry_date}}",
+          "style": "urgent_text"
+        }
+      ]
+    },
+    "created_date": "2025-08-11T17:18:45.259680",
+    "last_modified": "2025-08-11T17:18:45.259681"
+  },
+  "simple": {
+    "name": "Simple Message",
+    "description": "Clean and simple email template",
+    "category": "General",
+    "variables": [
+      "recipient_name",
+      "message_content"
+    ],
+    "content": {
+      "title": "Simple Message",
+      "header_color": "#7f8c8d",
+      "content_background": "#ffffff",
+      "accent_color": "#95a5a6",
+      "sections": [
+        {
+          "type": "header",
+          "content": "Simple Message",
+          "style": "simple_title"
+        },
+        {
+          "type": "text",
+          "content": "Hello {{recipient_name}},\n\n{{message_content}}",
+          "style": "simple_text"
+        }
+      ]
+    },
+    "created_date": "2025-08-11T17:18:45.259684",
+    "last_modified": "2025-08-11T17:18:45.259684"
+  }
+}

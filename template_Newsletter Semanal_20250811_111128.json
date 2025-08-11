@@ -1,0 +1,30 @@
+{
+  "nombre": "Newsletter Semanal",
+  "categoria": "Newsletter",
+  "headers_personalizados": {
+    "X-Mailer": "SendGrid-Professional",
+    "X-Priority": "3",
+    "X-MSMail-Priority": "Normal",
+    "Importance": "Normal",
+    "X-Campaign": "EmailCampaign",
+    "X-Sent-Date": "Mon, 11 Aug 2025 11:11:28 ",
+    "X-Campaign-Type": "Newsletter",
+    "X-Frequency": "Weekly",
+    "X-Unsubscribe": "Unsubscribe",
+    "List-Unsubscribe": "<mailto:unsubscribe@tuempresa.com>",
+    "Precedence": "bulk"
+  },
+  "contenido_html": "\n        <!DOCTYPE html>\n        <html lang=\"es\">\n        <head>\n            <meta charset=\"UTF-8\">\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n            <meta name=\"format-detection\" content=\"telephone=no\">\n            <meta name=\"format-detection\" content=\"date=no\">\n            <meta name=\"format-detection\" content=\"address=no\">\n            <meta name=\"format-detection\" content=\"email=no\">\n            <title>Newsletter - {{company_name}}</title>\n        </head>\n        <body style=\"margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4;\">\n            <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n                <!-- Header -->\n                <div style=\"background-color: #2c3e50; color: white; padding: 20px; text-align: center;\">\n                    <h1 style=\"margin: 0; font-size: 24px;\">{{company_name}}</h1>\n                    <p style=\"margin: 10px 0 0 0; opacity: 0.8;\">{{slogan}}</p>\n                </div>\n                \n                <!-- Contenido Principal -->\n                <div style=\"padding: 30px 20px;\">\n                    <h2 style=\"color: #2c3e50; margin-top: 0;\">¡Hola {{name}}!</h2>\n                    \n                    <p>Esperamos que estés teniendo un excelente día. Aquí tienes las últimas novedades:</p>\n                    \n                    <div style=\"background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;\">\n                        <h3 style=\"color: #2c3e50; margin-top: 0;\">{{titulo_destacado}}</h3>\n                        <p>{{descripcion_destacado}}</p>\n                        <a href=\"{{enlace_destacado}}\" style=\"background-color: #3498db; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;\">Leer Más</a>\n                    </div>\n                    \n                    <p>Gracias por ser parte de nuestra comunidad.</p>\n                    \n                    <p>Saludos,<br><strong>El equipo de {{company_name}}</strong></p>\n                </div>\n                \n                <!-- Footer -->\n                <div style=\"background-color: #34495e; color: white; padding: 20px; text-align: center; font-size: 12px;\">\n                    <p style=\"margin: 0 0 10px 0;\">© 2025 {{company_name}}. Todos los derechos reservados.</p>\n                    <p style=\"margin: 0;\">\n                        <a href=\"{{unsubscribe_link}}\" style=\"color: #bdc3c7; text-decoration: none;\">Darse de baja</a> |\n                        <a href=\"{{contact_link}}\" style=\"color: #bdc3c7; text-decoration: none;\">Contacto</a>\n                    </p>\n                </div>\n            </div>\n        </body>\n        </html>\n        ",
+  "contenido_texto": "",
+  "variables_disponibles": [
+    "enlace_destacado",
+    "titulo_destacado",
+    "name",
+    "company_name",
+    "unsubscribe_link",
+    "contact_link",
+    "descripcion_destacado",
+    "slogan"
+  ],
+  "creado_en": "2025-08-11T11:11:28.134840"
+}

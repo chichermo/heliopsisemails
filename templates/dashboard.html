@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Sistema de Emails Masivos{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+        </h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <a href="{{ url_for('create_campaign') }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Nueva Campaña
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stats-card">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-white-50 text-uppercase mb-1">
+                                Listas de Emails
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-white">{{ lists_count }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-list fa-2x text-white-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stats-card">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-white-50 text-uppercase mb-1">
+                                Templates
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-white">{{ templates_count }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file-alt fa-2x text-white-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stats-card">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-white-50 text-uppercase mb-1">
+                                Campañas Activas
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-white">
+                                {{ campaigns|selectattr('status', 'equalto', 'running')|list|length }}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-bullhorn fa-2x text-white-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card stats-card">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-white-50 text-uppercase mb-1">
+                                Emails Enviados
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-white">
+                                {{ campaigns|sum(attribute='sent_count') }}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-envelope fa-2x text-white-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Campaigns -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-history"></i> Campañas Recientes
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if campaigns %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Estado</th>
+                                    <th>Progreso</th>
+                                    <th>Enviados</th>
+                                    <th>Fecha</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for campaign in campaigns %}
+                                <tr>
+                                    <td>{{ campaign.name }}</td>
+                                    <td>
+                                        {% if campaign.status == 'pending' %}
+                                            <span class="badge bg-secondary">Pendiente</span>
+                                        {% elif campaign.status == 'running' %}
+                                            <span class="badge bg-primary">En Progreso</span>
+                                        {% elif campaign.status == 'completed' %}
+                                            <span class="badge bg-success">Completada</span>
+                                        {% elif campaign.status == 'failed' %}
+                                            <span class="badge bg-danger">Fallida</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if campaign.total_count > 0 %}
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" 
+                                                 style="width: {{ (campaign.sent_count / campaign.total_count * 100)|round(1) }}%">
+                                                {{ (campaign.sent_count / campaign.total_count * 100)|round(1) }}%
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                        <span class="text-muted">0%</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ campaign.sent_count }}/{{ campaign.total_count }}</td>
+                                    <td>{{ campaign.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+                                    <td>
+                                        {% if campaign.status == 'pending' %}
+                                        <a href="{{ url_for('start_campaign', campaign_id=campaign.id) }}" 
+                                           class="btn btn-sm btn-primary">
+                                            <i class="fas fa-play"></i> Iniciar
+                                        </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-inbox fa-3x text-muted"></i>
+                        <h5 class="mt-3 text-muted">No hay campañas aún</h5>
+                        <p class="text-muted">Crea tu primera campaña para comenzar</p>
+                        <a href="{{ url_for('create_campaign') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Crear Campaña
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-bolt"></i> Acciones Rápidas
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ url_for('create_list') }}" class="btn btn-outline-primary w-100">
+                                <i class="fas fa-list"></i><br>
+                                Crear Lista
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ url_for('create_template') }}" class="btn btn-outline-success w-100">
+                                <i class="fas fa-file-alt"></i><br>
+                                Crear Template
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ url_for('create_campaign') }}" class="btn btn-outline-warning w-100">
+                                <i class="fas fa-bullhorn"></i><br>
+                                Nueva Campaña
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ url_for('settings') }}" class="btn btn-outline-info w-100">
+                                <i class="fas fa-cog"></i><br>
+                                Configuración
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

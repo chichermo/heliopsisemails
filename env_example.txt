@@ -1,0 +1,17 @@
+# Configuración de Outlook
+OUTLOOK_EMAIL=tu_email@outlook.com
+OUTLOOK_PASSWORD=tu_password
+
+# Configuración de envío
+MAX_EMAILS_PER_HOUR=50
+DELAY_BETWEEN_EMAILS=30
+BATCH_SIZE=10
+
+# Configuración de contenido
+DEFAULT_SUBJECT=Mensaje importante
+DEFAULT_SENDER_NAME=Tu Nombre
+
+# Configuración de archivos
+EMAILS_FILE=emails.csv
+TEMPLATES_DIR=templates
+LOG_FILE=email_sender.log 
