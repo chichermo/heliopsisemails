@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Campaña - Sistema de Emails Masivos{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">
+            <i class="fas fa-plus"></i> Crear Nueva Campaña
+        </h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <a href="{{ url_for('campaigns') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Campaign Form -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-bullhorn"></i> Información de la Campaña
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nombre de la Campaña</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                    <div class="form-text">Ej: Newsletter Semanal, Promoción Black Friday, etc.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="template_id" class="form-label">Template</label>
+                                    <select class="form-control" id="template_id" name="template_id" required>
+                                        <option value="">Selecciona un template</option>
+                                        {% for template in templates %}
+                                        <option value="{{ template.id }}">{{ template.name }} - {{ template.subject }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <div class="form-text">Elige el template que se usará para esta campaña</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="list_id" class="form-label">Lista de Emails</label>
+                                    <select class="form-control" id="list_id" name="list_id" required>
+                                        <option value="">Selecciona una lista</option>
+                                        {% for list in lists %}
+                                        <option value="{{ list.id }}">{{ list.name }} ({{ list.contacts|length }} contactos)</option>
+                                        {% endfor %}
+                                    </select>
+                                    <div class="form-text">Elige la lista de emails para esta campaña</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('campaigns') }}" class="btn btn-secondary me-md-2">
+                                <i class="fas fa-times"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Crear Campaña
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Section -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-question-circle"></i> Ayuda
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Antes de Crear una Campaña</h6>
+                            <ul>
+                                <li>Asegúrate de tener al menos un template creado</li>
+                                <li>Asegúrate de tener al menos una lista de emails</li>
+                                <li>Verifica que tu configuración de Outlook esté correcta</li>
+                                <li>Prueba el template antes de enviar</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Proceso de Envío</h6>
+                            <ul>
+                                <li>Los emails se envían con un delay de 30 segundos</li>
+                                <li>El progreso se actualiza en tiempo real</li>
+                                <li>Puedes pausar y reanudar campañas</li>
+                                <li>Se guarda un log de todos los envíos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

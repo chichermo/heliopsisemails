@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}{{ email_list.name }} - Sistema de Emails Masivos{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1><i class="fas fa-list"></i> {{ email_list.name }}</h1>
+            <p class="text-muted">
+                <i class="fas fa-calendar"></i> Creada: {{ email_list.created_at.strftime('%d/%m/%Y %H:%M') }}
+            </p>
+        </div>
+        <div>
+            <a href="{{ url_for('edit_list', list_id=email_list.id) }}" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Editar Lista
+            </a>
+            <a href="{{ url_for('lists') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Volver
+            </a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">
+                <i class="fas fa-users"></i> Contactos ({{ contacts|length }})
+            </h5>
+        </div>
+        <div class="card-body">
+            {% if contacts %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Nombre</th>
+                            <th>Empresa</th>
+                            <th>Teléfono</th>
+                            <th>Fecha Agregado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                        <tr>
+                            <td>
+                                <i class="fas fa-envelope text-primary"></i>
+                                <strong>{{ contact.email }}</strong>
+                            </td>
+                            <td>{{ contact.name or 'N/A' }}</td>
+                            <td>{{ contact.company or 'N/A' }}</td>
+                            <td>{{ contact.phone or 'N/A' }}</td>
+                            <td>{{ contact.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="text-center py-4">
+                <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">No hay contactos en esta lista</h5>
+                <p class="text-muted">Agrega contactos editando la lista</p>
+                <a href="{{ url_for('edit_list', list_id=email_list.id) }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Agregar Contactos
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

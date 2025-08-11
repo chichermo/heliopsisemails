@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Template - Sistema de Emails Masivos{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">
+            <i class="fas fa-plus"></i> Crear Nuevo Template
+        </h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <a href="{{ url_for('templates') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Template Form -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-file-alt"></i> Información del Template
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nombre del Template</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                    <div class="form-text">Ej: Newsletter Semanal, Promoción Especial, etc.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Asunto del Email</label>
+                                    <input type="text" class="form-control" id="subject" name="subject" required>
+                                    <div class="form-text">Asunto que aparecerá en el email</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Contenido del Email</label>
+                            <textarea class="form-control" id="content" name="content" rows="15" required>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ subject }}</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h1 style="color: #007bff;">Hola {{ name }},</h1>
+        
+        <p>Este es un ejemplo de template de email. Puedes personalizar este contenido usando las siguientes variables:</p>
+        
+        <ul>
+            <li><strong>{{ name }}</strong> - Nombre del destinatario</li>
+            <li><strong>{{ email }}</strong> - Email del destinatario</li>
+            <li><strong>{{ company }}</strong> - Empresa del destinatario</li>
+            <li><strong>{{ phone }}</strong> - Teléfono del destinatario</li>
+        </ul>
+        
+        <p>¡Gracias por tu atención!</p>
+        
+        <hr style="border: 1px solid #eee; margin: 30px 0;">
+        
+        <p style="font-size: 12px; color: #666;">
+            Este email fue enviado desde el Sistema de Emails Masivos.<br>
+            Para darte de baja, responde con "UNSUBSCRIBE" en el asunto.
+        </p>
+    </div>
+</body>
+</html></textarea>
+                            <div class="form-text">
+                                <strong>Variables disponibles:</strong><br>
+                                <code>{{ name }}</code> - Nombre del destinatario<br>
+                                <code>{{ email }}</code> - Email del destinatario<br>
+                                <code>{{ company }}</code> - Empresa del destinatario<br>
+                                <code>{{ phone }}</code> - Teléfono del destinatario
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('templates') }}" class="btn btn-secondary me-md-2">
+                                <i class="fas fa-times"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Crear Template
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Section -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-question-circle"></i> Ayuda
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Variables de Personalización</h6>
+                            <ul>
+                                <li><code>{{ name }}</code> - Se reemplaza con el nombre del destinatario</li>
+                                <li><code>{{ email }}</code> - Se reemplaza con el email del destinatario</li>
+                                <li><code>{{ company }}</code> - Se reemplaza con la empresa del destinatario</li>
+                                <li><code>{{ phone }}</code> - Se reemplaza con el teléfono del destinatario</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Consejos</h6>
+                            <ul>
+                                <li>Usa HTML para formatear el contenido</li>
+                                <li>Incluye siempre un enlace de desuscripción</li>
+                                <li>Mantén el diseño responsive</li>
+                                <li>Prueba el template antes de enviar</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

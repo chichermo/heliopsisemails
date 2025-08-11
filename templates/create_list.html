@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Lista - Sistema de Emails Masivos{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">
+            <i class="fas fa-plus"></i> Crear Nueva Lista
+        </h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <a href="{{ url_for('lists') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create List Form -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-list"></i> Información de la Lista
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nombre de la Lista</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                    <div class="form-text">Ej: Clientes VIP, Suscriptores, etc.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="emails_data" class="form-label">Emails (uno por línea)</label>
+                            <textarea class="form-control" id="emails_data" name="emails_data" rows="15" 
+                                      placeholder="email@ejemplo.com, Nombre, Empresa, Teléfono
+otro@ejemplo.com, Otro Nombre, Otra Empresa, Otro Teléfono
+tercero@ejemplo.com, Tercer Nombre, Tercera Empresa, Tercer Teléfono" required></textarea>
+                            <div class="form-text">
+                                <strong>Formato:</strong> email, nombre, empresa, teléfono (separados por comas)<br>
+                                <strong>Ejemplo:</strong> juan@empresa.com, Juan Pérez, Empresa ABC, +1234567890
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('lists') }}" class="btn btn-secondary me-md-2">
+                                <i class="fas fa-times"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Crear Lista
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Section -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-question-circle"></i> Ayuda
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Formato de Datos</h6>
+                            <ul>
+                                <li><strong>Email:</strong> Obligatorio, debe ser válido</li>
+                                <li><strong>Nombre:</strong> Opcional, para personalización</li>
+                                <li><strong>Empresa:</strong> Opcional, para personalización</li>
+                                <li><strong>Teléfono:</strong> Opcional, para personalización</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Ejemplos</h6>
+                            <pre class="bg-light p-2 rounded">
+juan@empresa.com, Juan Pérez, Empresa ABC, +1234567890
+maria@otra.com, María García, Otra Empresa, +0987654321
+pedro@tercera.com, Pedro López, Tercera Empresa, +1122334455</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

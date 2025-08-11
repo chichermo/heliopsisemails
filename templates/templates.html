@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Templates - Sistema de Emails Masivos{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">
+            <i class="fas fa-file-alt"></i> Templates
+        </h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <a href="{{ url_for('create_template') }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Nuevo Template
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Templates -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-file-alt"></i> Mis Templates
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if templates %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Asunto</th>
+                                    <th>Fecha Creación</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for template in templates %}
+                                <tr>
+                                    <td>
+                                        <strong>{{ template.name }}</strong>
+                                    </td>
+                                    <td>{{ template.subject }}</td>
+                                    <td>{{ template.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-eye"></i> Ver
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-outline-warning">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i> Eliminar
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-file-alt fa-3x text-muted"></i>
+                        <h5 class="mt-3 text-muted">No hay templates aún</h5>
+                        <p class="text-muted">Crea tu primer template para comenzar</p>
+                        <a href="{{ url_for('create_template') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Crear Template
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

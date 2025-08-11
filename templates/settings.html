@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Configuración - Sistema de Emails Masivos{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">
+            <i class="fas fa-cog"></i> Configuración
+        </h1>
+    </div>
+
+    <!-- Settings Form -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-envelope"></i> Configuración de Outlook
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="outlook_email" class="form-label">Email de Outlook</label>
+                                    <input type="email" class="form-control" id="outlook_email" name="outlook_email" 
+                                           value="{{ user.outlook_email or '' }}" required>
+                                    <div class="form-text">Tu email de Outlook (ej: usuario@outlook.com)</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="outlook_password" class="form-label">Contraseña de Aplicación</label>
+                                    <input type="password" class="form-control" id="outlook_password" name="outlook_password" 
+                                           value="{{ user.outlook_password or '' }}" required>
+                                    <div class="form-text">
+                                        <strong>IMPORTANTE:</strong> Usa una contraseña de aplicación, no tu contraseña normal.<br>
+                                        <a href="https://account.microsoft.com" target="_blank" class="text-primary">
+                                            <i class="fas fa-external-link-alt"></i> Generar contraseña de aplicación
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Guardar Configuración
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Section -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-question-circle"></i> Cómo Configurar Outlook
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Paso 1: Habilitar Autenticación de Aplicaciones</h6>
+                            <ol>
+                                <li>Ve a <a href="https://account.microsoft.com" target="_blank">account.microsoft.com</a></li>
+                                <li>Inicia sesión con tu cuenta de Outlook</li>
+                                <li>Ve a "Seguridad" → "Seguridad avanzada"</li>
+                                <li>Activa "Verificación en dos pasos" si no está activada</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Paso 2: Generar Contraseña de Aplicación</h6>
+                            <ol>
+                                <li>Ve a "Seguridad" → "Contraseñas de aplicación"</li>
+                                <li>Selecciona "Crear una nueva contraseña de aplicación"</li>
+                                <li>Elige "Correo" como aplicación</li>
+                                <li>Copia la contraseña generada (16 caracteres)</li>
+                                <li>Pégala en el campo "Contraseña de Aplicación" arriba</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info mt-3">
+                        <h6><i class="fas fa-info-circle"></i> Información Importante</h6>
+                        <ul class="mb-0">
+                            <li>Nunca uses tu contraseña normal de Outlook</li>
+                            <li>Las contraseñas de aplicación son más seguras</li>
+                            <li>Puedes generar múltiples contraseñas de aplicación</li>
+                            <li>Si cambias tu contraseña principal, las contraseñas de aplicación siguen funcionando</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Listas de Emails - Sistema de Emails Masivos{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><i class="fas fa-list"></i> Listas de Emails</h1>
+        <a href="{{ url_for('create_list') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Crear Nueva Lista
+        </a>
+    </div>
+
+    {% if lists %}
+    <div class="row">
+        {% for list in lists %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-list-alt text-primary"></i>
+                        {{ list.name }}
+                    </h5>
+                    <p class="card-text text-muted">
+                        <small>
+                            <i class="fas fa-calendar"></i> Creada: {{ list.created_at.strftime('%d/%m/%Y') }}
+                        </small>
+                    </p>
+                    <p class="card-text">
+                        <strong>Contactos:</strong> 
+                        {% set contact_count = list.contacts|length if list.contacts else 0 %}
+                        {{ contact_count }} email{{ 's' if contact_count != 1 else '' }}
+                    </p>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <div class="btn-group w-100" role="group">
+                        <a href="{{ url_for('view_list', list_id=list.id) }}" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-eye"></i> Ver
+                        </a>
+                        <a href="{{ url_for('edit_list', list_id=list.id) }}" class="btn btn-outline-warning btn-sm">
+                            <i class="fas fa-edit"></i> Editar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <i class="fas fa-list fa-3x text-muted mb-3"></i>
+        <h3 class="text-muted">No hay listas creadas</h3>
+        <p class="text-muted">Crea tu primera lista de emails para comenzar</p>
+        <a href="{{ url_for('create_list') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Crear Primera Lista
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
