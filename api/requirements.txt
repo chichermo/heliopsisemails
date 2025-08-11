@@ -1,1 +1,2 @@
-Flask==2.3.3
+# No external dependencies needed - using only standard Python libraries
+# This ensures Vercel compatibility
