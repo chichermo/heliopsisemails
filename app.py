@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 import threading
 import time
 from email_sender import EmailSender
-from sendgrid_sender import SendGridSender
+from sendgrid_definitivo import SendGridDefinitive as SendGridSender
 from config import Config
 
 app = Flask(__name__)
@@ -270,6 +270,11 @@ with app.app_context():
 # Variables globales para el estado de envío
 sending_status = {}
 current_campaigns = {}
+
+@app.route('/favicon.ico')
+def favicon():
+    """Servir favicon para evitar error 404"""
+    return app.send_static_file('favicon.ico')
 
 @app.route('/')
 def index():
