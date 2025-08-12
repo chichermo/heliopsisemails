@@ -20,13 +20,46 @@ class handler(BaseHTTPRequestHandler):
             <title>Heliopsis Email System</title>
             <meta charset="UTF-8">
             <style>
-                body { font-family: Arial, sans-serif; margin: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
-                .container { max-width: 800px; margin: 0 auto; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; backdrop-filter: blur(10px); }
+                body { 
+                    font-family: Arial, sans-serif; 
+                    margin: 40px; 
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                    color: white; 
+                }
+                .container { 
+                    max-width: 800px; 
+                    margin: 0 auto; 
+                    background: rgba(255,255,255,0.1); 
+                    padding: 30px; 
+                    border-radius: 15px; 
+                    backdrop-filter: blur(10px); 
+                }
                 h1 { text-align: center; color: #fff; margin-bottom: 30px; }
-                .feature { background: rgba(255,255,255,0.2); padding: 20px; margin: 15px 0; border-radius: 10px; }
-                .status { background: #4CAF50; color: white; padding: 10px; border-radius: 5px; text-align: center; margin: 20px 0; }
-                .button { background: #2196F3; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 10px; }
+                .feature { 
+                    background: rgba(255,255,255,0.2); 
+                    padding: 20px; 
+                    margin: 15px 0; 
+                    border-radius: 10px; 
+                }
+                .status { 
+                    background: #4CAF50; 
+                    color: white; 
+                    padding: 10px; 
+                    border-radius: 5px; 
+                    text-align: center; 
+                    margin: 20px 0; 
+                }
+                .button { 
+                    background: #2196F3; 
+                    color: white; 
+                    padding: 12px 24px; 
+                    text-decoration: none; 
+                    border-radius: 5px; 
+                    display: inline-block; 
+                    margin: 10px; 
+                }
                 .button:hover { background: #1976D2; }
+                .nav { text-align: center; margin: 20px 0; }
             </style>
         </head>
         <body>
@@ -35,6 +68,14 @@ class handler(BaseHTTPRequestHandler):
                 
                 <div class="status">
                     ✅ Sistema funcionando correctamente en Vercel
+                </div>
+                
+                <div class="nav">
+                    <a href="/dashboard" class="button">📊 Dashboard</a>
+                    <a href="/lists" class="button">📧 Listas de Emails</a>
+                    <a href="/templates" class="button">🎨 Templates</a>
+                    <a href="/campaigns" class="button">📢 Campañas</a>
+                    <a href="/api/health" class="button">🔍 API Status</a>
                 </div>
                 
                 <div class="feature">
@@ -61,10 +102,6 @@ class handler(BaseHTTPRequestHandler):
                     <a href="https://github.com/chichermo/heliopsisemails" class="button">📁 Ver en GitHub</a>
                     <a href="mailto:heliopsis@outlook.be" class="button">📧 Contactar</a>
                 </div>
-                
-                <div style="text-align: center; margin-top: 20px; font-size: 12px; opacity: 0.8;">
-                    Sistema desarrollado por Heliopsis - Desplegado en Vercel
-                </div>
             </div>
         </body>
         </html>
@@ -80,13 +117,7 @@ class handler(BaseHTTPRequestHandler):
         response = {
             "status": "success",
             "message": "Heliopsis Email System API funcionando correctamente",
-            "version": "2.0.0",
-            "features": [
-                "SendGrid Integration",
-                "Template Management",
-                "Contact Lists",
-                "Professional Headers"
-            ]
+            "version": "2.0.0"
         }
         
         self.wfile.write(json.dumps(response, ensure_ascii=False).encode())
