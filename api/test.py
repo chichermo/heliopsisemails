@@ -1,9 +1,17 @@
-from flask import Flask
+#!/usr/bin/env python3
+"""
+Archivo de prueba simple para verificar funcionalidad básica
+"""
 
-app = Flask(__name__)
+def test_basic_functionality():
+    """Prueba básica de funcionalidad"""
+    return {
+        "status": "success",
+        "message": "Basic functionality test passed",
+        "python_version": "3.11",
+        "test": True
+    }
 
-@app.route('/')
-def hello():
-    return "¡Hola! Vercel está funcionando correctamente!"
-
-handler = app
+if __name__ == "__main__":
+    result = test_basic_functionality()
+    print("Test result:", result)

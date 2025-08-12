@@ -1,2 +1,2 @@
-# No external dependencies needed - using only standard Python libraries
-# This ensures Vercel compatibility
+requests==2.31.0
+tqdm==4.66.1
