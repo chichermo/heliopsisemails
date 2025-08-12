@@ -84,7 +84,7 @@ with app.app_context():
 @app.route('/')
 def index():
     """Página principal - Dashboard simplificado"""
-    return render_template('dashboard.html')
+    return redirect(url_for('dashboard'))
 
 @app.route('/dashboard')
 def dashboard():
@@ -111,6 +111,67 @@ def templates():
     user = User.query.filter_by(username='admin').first()
     templates = EmailTemplate.query.filter_by(user_id=user.id).all()
     return render_template('templates.html', templates=templates)
+
+# Rutas de autenticación que faltaban
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """Página de login"""
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        
+        user = User.query.filter_by(username=username).first()
+        if user and check_password_hash(user.password_hash, password):
+            session['user_id'] = user.id
+            session['username'] = user.username
+            flash('¡Login exitoso!', 'success')
+            return redirect(url_for('dashboard'))
+        else:
+            flash('Usuario o contraseña incorrectos', 'error')
+    
+    return render_template('login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    """Página de registro"""
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
+        if User.query.filter_by(username=username).first():
+            flash('El usuario ya existe', 'error')
+        else:
+            user = User(
+                username=username,
+                email=email,
+                password_hash=generate_password_hash(password)
+            )
+            db.session.add(user)
+            db.session.commit()
+            flash('¡Usuario creado exitosamente!', 'success')
+            return redirect(url_for('login'))
+    
+    return render_template('register.html')
+
+@app.route('/logout')
+def logout():
+    """Cerrar sesión"""
+    session.clear()
+    flash('Has cerrado sesión', 'info')
+    return redirect(url_for('login'))
+
+@app.route('/campaigns')
+def campaigns():
+    """Lista de campañas"""
+    user = User.query.filter_by(username='admin').first()
+    return render_template('campaigns.html', user=user)
+
+@app.route('/profile')
+def profile():
+    """Perfil del usuario"""
+    user = User.query.filter_by(username='admin').first()
+    return render_template('profile.html', user=user)
 
 @app.route('/api/health')
 def health():
@@ -150,4 +211,4 @@ def send_test():
 handler = app
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+    app.run(debug=True, host='0.0.0.0', port=5000)
